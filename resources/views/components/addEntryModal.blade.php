@@ -60,7 +60,8 @@
         @if ($errors->any())
             showAddEntryModal('{{ old('entry_type') }}');
         @endif
-    })
+    });
+    
     function showAddEntryModal(entryType){
         getLocation();
         $('#addEntryModal #entry_type').val(entryType);
@@ -102,49 +103,6 @@
 
 </script>
 <script>
-    // $(document).ready(function() {
-    //     const $video = $("#camera");
-    //     const $canvas = $("#snapshot");
-    //     const context = $canvas[0].getContext("2d");
-    //     const $takePhotoBtn = $("#takePhoto");
-    //     const $photoInput = $("#photoInput");
-    //     const $retakePhotoBtn = $("#retakePhoto");
-
-    //     $retakePhotoBtn.hide();
-    //     $canvas.hide();
-
-    //     // Start camera
-    //     navigator.mediaDevices.getUserMedia({ video: true })
-    //         .then(function(stream) {
-    //             $video[0].srcObject = stream;
-    //         })
-    //         .catch(function(err) {
-    //             alert("Camera access denied: " + err);
-    //         });
-
-    //     // Capture button
-    //     $takePhotoBtn.on("click", function() {
-    //         $canvas.show();
-    //         $retakePhotoBtn.show();
-    //         $takePhotoBtn.hide();
-    //         $canvas[0].width = $video[0].videoWidth;
-    //         $canvas[0].height = $video[0].videoHeight;
-    //         $video.hide();
-    //         context.drawImage($video[0], 0, 0, $canvas[0].width, $canvas[0].height);
-            
-    //         const photoData = $canvas[0].toDataURL("image/png");
-    //         $photoInput.val(photoData); // set hidden input for form
-            
-    //     });
-
-    //     $retakePhotoBtn.on("click", function() {
-    //         $canvas.hide();
-    //         $retakePhotoBtn.hide();
-    //         $takePhotoBtn.show();
-    //         $video.show();
-    //     });
-    // });
-
 $(document).ready(function() {
     const $video = $("#camera");
     const $canvas = $("#snapshot");
@@ -155,138 +113,7 @@ $(document).ready(function() {
 
     takePhoto();
 
-    // Start camera
-    // navigator.mediaDevices.getUserMedia({ video: true })
-    //     .then(function(stream) {
-    //         $video[0].srcObject = stream;
-
-    //         // Ensure video metadata is loaded
-    //         $video.on("loadedmetadata", function() {
-    //             $video[0].play();
-    //         });
-
-    //         $video.css("transform", "scaleX(-1)");
-    //     })
-    //     .catch(function(err) {
-    //         alert("Camera access denied: " + err);
-    //         disablePhoto();
-    //         $photoInput.val(null);
-    //     });
     startCamera();
-
-    // Capture button
-    // $takePhotoBtn.on("click", function() {
-    //     const width = $video[0].videoWidth;
-    //     const height = $video[0].videoHeight;
-
-    //     if (width && height) {
-    //         $canvas[0].width = width;
-    //         $canvas[0].height = height;
-
-    //         // Draw video frame
-    //         context.drawImage($video[0], 0, 0, width, height);
-
-    //         // Add timestamp
-    //         const now = new Date();
-    //         const formattedDate = now.toLocaleString("en-PH", { 
-    //             timeZone: "Asia/Manila" 
-    //         });
-
-    //         context.font = "15px Arial";
-
-    //         // Measure text width & height for background box
-    //         const textWidth = context.measureText(formattedDate).width;
-    //         const padding = 8;
-    //         const textHeight = 20; // rough height since canvas doesn’t measure height
-    //         const x = 20;
-    //         const y = height - 30;
-
-    //         // Draw black background rectangle
-    //         context.fillStyle = "black";
-    //         context.fillRect(x - padding / 2, y - textHeight, textWidth + padding, textHeight + padding / 2);
-
-    //         // Draw white text
-    //         context.fillStyle = "white";
-    //         context.fillText(formattedDate, x, y);
-
-    //         savePhoto();
-    //     }
-    // });
-
-    // $takePhotoBtn.on("click", function() {
-    //     const width = $video[0].videoWidth;
-    //     const height = $video[0].videoHeight;
-
-    //     if (width && height) {
-    //         $canvas[0].width = width;
-    //         $canvas[0].height = height;
-
-    //         // Clear previous drawings
-    //         context.clearRect(0, 0, width, height);
-
-    //         // Draw video frame
-    //         context.save();
-    //         context.scale(-1, 1); // flip horizontally to match mirror preview
-    //         context.drawImage($video[0], -width, 0, width, height);
-    //         context.restore();
-
-    //         // Add timestamp
-    //         const now = new Date();
-    //         const formattedDate = now.toLocaleString("en-PH", { 
-    //             timeZone: "Asia/Manila" 
-    //         });
-
-    //         // Default GPS text
-    //         let gpsText = "GPS: Fetching...";
-
-    //         // Function to draw overlay text (date + gps)
-    //         function drawOverlay() {
-    //             context.font = "15px Arial";
-    //             context.textBaseline = "top";
-
-    //             const padding = 8;
-    //             let lines = [formattedDate, gpsText];
-    //             let textHeight = 20;
-    //             let boxHeight = lines.length * textHeight + padding;
-    //             let boxWidth = Math.max(
-    //                 ...lines.map(line => context.measureText(line).width)
-    //             ) + padding;
-
-    //             const x = 20;
-    //             const y = height - boxHeight - 20;
-
-    //             // Draw background box
-    //             context.fillStyle = "black";
-    //             context.fillRect(x - padding / 2, y - padding / 2, boxWidth, boxHeight);
-
-    //             // Draw text lines
-    //             context.fillStyle = "white";
-    //             lines.forEach((line, i) => {
-    //                 context.fillText(line, x, y + i * textHeight);
-    //             });
-
-    //             savePhoto();
-    //         }
-
-    //         // Try to get GPS location
-    //         if (navigator.geolocation) {
-    //             navigator.geolocation.getCurrentPosition(
-    //                 function(position) {
-    //                     gpsText = `GPS: ${position.coords.latitude.toFixed(5)}, ${position.coords.longitude.toFixed(5)}`;
-    //                     drawOverlay();
-    //                 },
-    //                 function(error) {
-    //                     gpsText = "GPS: Unavailable";
-    //                     drawOverlay();
-    //                 },
-    //                 { enableHighAccuracy: true, timeout: 5000 }
-    //             );
-    //         } else {
-    //             gpsText = "GPS: Not supported";
-    //             drawOverlay();
-    //         }
-    //     }
-    // });
 
     $takePhotoBtn.on("click", async function() {
         $takePhotoBtn.text("Taking photo...");
@@ -370,9 +197,6 @@ $(document).ready(function() {
         savePhoto();
     });
 
-
-
-
     // Retake button
     $retakePhotoBtn.on("click", function() {
         takePhoto();
@@ -444,8 +268,4 @@ $(document).ready(function() {
     }
 
 });
-
-
-
-
 </script>
