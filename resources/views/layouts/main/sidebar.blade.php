@@ -64,7 +64,7 @@
               </a>
             </li>
             @auth
-              @if (auth()->user()->roles->contains('id', 1))
+              @if (auth()->user()->roles->contains('role_type_id', 1))
                 <li class="nav-header">ADMIN</li>
                 <li class="nav-item ">
                   <a href="{{ route('users.index', ['division' => request('division')]) }}" class="nav-link ">
