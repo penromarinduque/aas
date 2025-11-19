@@ -115,9 +115,9 @@ class UserController extends Controller
                 'status' => $request->employment_status,
                 'division' => $request->division        
             ]);
+            return redirect()->route('users.index')->with('success', 'User created successfully.');
         });
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
 
     }
 }
