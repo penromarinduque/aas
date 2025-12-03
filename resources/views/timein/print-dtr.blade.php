@@ -406,7 +406,7 @@
                                         <div style="width: 80%; margin: 5px auto; border-top: 1px solid #000;"></div>
                                         <select class="position" id="pstn{{ $user->badgeNumber }}"
                                             style="width: 280px; text-align: center;">
-                                            <option value="OIC, PENR Officer">PENR Officer</option>
+                                            <option value="PENR Officer">PENR Officer</option>
                                             <option value="In-Charge, Management Services Division" {{ $division == 'main' ? 'selected' : '' }}>In-Charge, Management Services Division</option>
                                             <option value="Chief, Technical Services Division" {{ $division == 'tsd' ? 'selected' : '' }}>Chief, Technical Services Division</option>
                                             <option value="Forester III/PASu, MWS" {{ $division == 'pamo' ? 'selected' : '' }}>Forester III/PASu, MWS</option>
